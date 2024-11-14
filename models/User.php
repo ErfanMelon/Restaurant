@@ -72,4 +72,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     {
         return \Yii::$app->security->validatePassword($password,$this->password);
     }
+
+    public function getRestaurant(){
+        return Restaurant::findOne(['user_id' => $this->getId()]);
+    }
 }
