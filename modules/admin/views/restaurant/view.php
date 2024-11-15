@@ -33,7 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'address',
             'phone_number',
-            'user_id',
+            ['label' => 'Owner', 'value' => function ($model) {
+                return $model->user->user_name;
+            }]
         ],
     ]) ?>
 

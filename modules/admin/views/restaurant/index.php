@@ -25,16 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+//        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'restaurant_id',
+//            'restaurant_id',
             'name',
             'address',
             'phone_number',
-//            'user_id',
-//            'created_at',
+            ['label' =>'Owner','attribute'=>'user_id' , 'value' => fn($model)=>$model->getUserName()],
+            ['label' =>'Created On' , 'attribute' =>'created_at' , 'value' => fn($model)=>Yii::$app->formatter->asRelativeTime($model->created_at)],
 //            'updated_at',
             [
                 'class' => ActionColumn::className(),

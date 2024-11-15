@@ -18,14 +18,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Menu', Url::to(['create', 'restaurant_id'=>Yii::$app->request->get()['MenuSearch']['restaurant_id']??'']), ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Menu', Url::to(['create', 'restaurant_id' => Yii::$app->request->get()['MenuSearch']['restaurant_id'] ?? '']), ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+//        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             ['label' => 'Menu Name', 'attribute' => 'title'],
@@ -35,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Menu $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'menu_id' => $model->menu_id]);
-                 }
+                }
             ],
         ],
     ]); ?>

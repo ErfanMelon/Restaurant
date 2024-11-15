@@ -33,10 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'restaurant_id',
             'title',
             'is_active:boolean',
-            'created_at',
-            'updated_at',
-            'created_by',
-            'updated_by',
+            'created_at:datetime',
         ],
     ]) ?>
 
