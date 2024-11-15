@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\modules\admin\models\Restaurant;
 use yii\db\ActiveRecord;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface

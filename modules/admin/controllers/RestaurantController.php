@@ -1,14 +1,13 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\admin\controllers;
 
-use app\models\Restaurant;
-use app\models\RestaurantSearch;
+use app\modules\admin\models\Restaurant;
+use app\modules\admin\models\RestaurantSearch;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * RestaurantController implements the CRUD actions for Restaurant model.

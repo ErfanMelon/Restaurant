@@ -1,8 +1,9 @@
 <?php
 
-namespace app\models;
+namespace app\modules\admin\models;
 
-use Yii;
+use app\models\User;
+use app\models\Users;
 use yii\helpers\ArrayHelper;
 
 /**

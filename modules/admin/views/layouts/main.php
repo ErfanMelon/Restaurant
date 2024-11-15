@@ -32,23 +32,23 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <header id="header">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
+        'brandLabel' => 'Admin Panel',
+        'brandUrl' => \yii\helpers\Url::toRoute('/admin'),
+        'options' => ['class' => 'navbar-expand-md navbar-light bg-light fixed-top']
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav ml-auto'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Restaurants', 'url' => ['/admin/restaurant'] , 'visible' => !Yii::$app->user->isGuest],
+
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'])
                     . Html::submitButton(
                         'Logout (' . Yii::$app->user->identity->user_name . ')',
-                        ['class' => 'nav-link btn btn-link logout']
+                        ['class' => 'nav-link btn btn-link text-dark logout']
                     )
                     . Html::endForm()
                     . '</li>',

@@ -1,13 +1,13 @@
 <?php
 
-use app\models\Restaurant;
-use yii\helpers\Html;
-use yii\helpers\Url;
+use app\modules\admin\models\Restaurant;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
-/** @var app\models\RestaurantSearch $searchModel */
+/** @var \app\modules\admin\models\RestaurantSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Restaurants';
