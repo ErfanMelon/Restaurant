@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]); ?>
 
-            <?= $form->field($model, 'user_name')->textInput(['autofocus' => true]) ?>
+            <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
 
             <?= $form->field($model, 'email')->textInput() ?>
 

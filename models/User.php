@@ -2,79 +2,101 @@
 
 namespace app\models;
 
-use app\modules\admin\models\Restaurant;
-use yii\db\ActiveRecord;
+use Yii;
 
-class User extends ActiveRecord implements \yii\web\IdentityInterface
+/**
+ * This is the model class for table "user".
+ *
+ * @property int $user_id
+ * @property string $user_name
+ * @property string $email
+ * @property string $password
+ * @property string $auth_key
+ * @property string $access_token
+ * @property string|null $user_status
+ * @property string|null $user_type
+ */
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+    private const USER_TYPE_ADMIN = 'ADMIN';
+    private const USER_TYPE_USER = 'USER';
+    private const USER_TYPE_RESTAURANT = 'RESTAURANT';
+
+    /**
+     * {@inheritdoc}
+     */
     public static function tableName()
     {
-        return 'users';
+        return 'user';
     }
 
     /**
      * {@inheritdoc}
      */
+    public function rules()
+    {
+        return [
+            [['user_name', 'email', 'password', 'auth_key', 'access_token'], 'required'],
+            [['user_status', 'user_type'], 'string'],
+            [['user_name', 'email'], 'string', 'max' => 150],
+            [['password', 'auth_key', 'access_token'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'user_id' => 'User ID',
+            'user_name' => 'User Name',
+            'email' => 'Email',
+            'password' => 'Password',
+            'auth_key' => 'Auth Key',
+            'access_token' => 'Access Token',
+            'user_status' => 'User Status',
+            'user_type' => 'User Type',
+        ];
+    }
+
     public static function findIdentity($id)
     {
-        return self::findOne($id);
+        return user::findOne($id);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return self::findOne(['access_token' => $token]);
+        return user::findOne(['access_token' => $token]);
     }
 
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($email)
-    {
-        return self::findOne(['email' => $email]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
-        return $this->id;
+        return $this->user_id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAuthKey()
     {
         return $this->auth_key;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateAuthKey($authKey)
     {
         return $this->auth_key === $authKey;
     }
 
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validatePassword($password)
+    public static function getByEmail($email)
     {
-        return \Yii::$app->security->validatePassword($password,$this->password);
+        return user::findOne(['email' => $email]);
     }
 
-    public function getRestaurant(){
-        return Restaurant::findOne(['user_id' => $this->getId()]);
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password);
+    }
+
+    public function is_admin()
+    {
+        return $this->user_type === self::USER_TYPE_ADMIN;
     }
 }

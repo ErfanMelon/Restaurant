@@ -95,28 +95,6 @@ class RestaurantController extends Controller
             'model' => $model,
         ]);
     }
-    public function actionNew()
-    {
-        if(\Yii::$app->user->identity->getRestaurant()){
-            \Yii::$app->session->setFlash('error','you already have a restaurant');
-            return $this->redirect(\Yii::$app->homeUrl);
-        }
-        $model = new Restaurant();
-        $model->user_id = \Yii::$app->user->id;
-        $model->isNewRecord = false;
-        if ($this->request->isPost) {
-            $model->isNewRecord = true;
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'restaurant_id' => $model->restaurant_id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->render('new', [
-            'model' => $model,
-        ]);
-    }
 
     /**
      * Updates an existing Restaurant model.

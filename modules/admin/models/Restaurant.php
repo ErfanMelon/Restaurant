@@ -4,6 +4,7 @@ namespace app\modules\admin\models;
 
 use app\models\User;
 use app\models\Users;
+use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -29,6 +30,12 @@ class Restaurant extends \yii\db\ActiveRecord
         return 'restaurant';
     }
 
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -42,7 +49,7 @@ class Restaurant extends \yii\db\ActiveRecord
             [['phone_number'], 'string', 'max' => 11],
             [['user_id'], 'exist', 'skipOnError' => true,
                 'targetClass' => User::class,
-                'targetAttribute' => ['user_id' => 'id']],
+                'targetAttribute' => ['user_id' => 'user_id']],
             [['user_id'],'immutableOnUpdate'],
             [['user_id'],'unique' , 'message' => 'user already owns restaurant'],
         ];
@@ -71,21 +78,20 @@ class Restaurant extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['user_id' => 'user_id']);
+    }
+    public function getUserName()
+    {
+        return User::findOne(['user_id' =>$this->user_id])->user_name;
     }
 
     public function getUserList()
     {
-        return ArrayHelper::map(User::find()->all(), 'id', 'user_name');
+        return ArrayHelper::map(User::find()->all(), 'user_id', 'user_name');
     }
 
     public function save($runValidation = true, $attributeNames = null): bool
     {
-        if ($this->getIsNewRecord()) {
-            $this->created_at = time();
-        } else {
-            $this->updated_at = time();
-        }
         return parent::save($runValidation, $attributeNames);
     }
 

@@ -53,7 +53,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     . Html::endForm()
                     . '</li>',
             ['label' => 'Register', 'url' => ['/site/register'] , 'visible' => Yii::$app->user->isGuest],
-        ]
+            ['label'=>'Admin' , 'url' => ['/admin'] , 'visible' => Yii::$app->user->identity->is_admin()]
+        ],
     ]);
     NavBar::end();
     ?>

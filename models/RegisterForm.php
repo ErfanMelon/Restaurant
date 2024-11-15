@@ -7,7 +7,7 @@ use yii\helpers\VarDumper;
 
 class RegisterForm extends Model
 {
-    public $user_name;
+    public $name;
     public $password;
     public $email;
     public $password_repeat;
@@ -15,7 +15,7 @@ class RegisterForm extends Model
     public function rules()
     {
         return [
-            [['user_name', 'password', 'email', 'password_repeat'], 'required'],
+            [['name', 'password', 'email', 'password_repeat'], 'required'],
             ['email', 'email'],
             ['user_name', 'string', 'min' => 3, 'max' => 150],
             [['password', 'password_repeat'], 'string', 'min' => 8, 'max' => 255],
@@ -26,7 +26,7 @@ class RegisterForm extends Model
     public function register()
     {
         $user = new User();
-        $user->user_name = $this->user_name;
+        $user->user_name = $this->name;
         $user->email = $this->email;
         $user->password = \Yii::$app->security->generatePasswordHash($this->password);
         $user->access_token = \Yii::$app->security->generateRandomString();
