@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+        <?= Html::a('Menus', ['/admin/menu/index', 'MenuSearch[restaurant_id]' => $model->restaurant_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Update', ['update', 'restaurant_id' => $model->restaurant_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'restaurant_id' => $model->restaurant_id], [
             'class' => 'btn btn-danger',
