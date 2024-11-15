@@ -37,11 +37,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
+        'options' => ['class' => 'navbar-nav ml-auto'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Restaurants', 'url' => ['/restaurant'] , 'visible' => !Yii::$app->user->isGuest],
+
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
@@ -53,7 +55,6 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     . Html::endForm()
                     . '</li>',
             ['label' => 'Register', 'url' => ['/site/register'] , 'visible' => Yii::$app->user->isGuest],
-            ['label' => 'Restaurants', 'url' => ['/restaurant'] , 'visible' => !Yii::$app->user->isGuest],
         ]
     ]);
     NavBar::end();
