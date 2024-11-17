@@ -33,6 +33,9 @@ class RegisterForm extends Model
         $user->auth_key = \Yii::$app->security->generateRandomString();
 
         if($user->save()){
+            $auth = \Yii::$app->authManager;
+            $customerRole = $auth->getRole('customer');
+            $auth->assign($customerRole, $user->getId());
             return true;
         }
         \Yii::error('user not registered '.VarDumper::dumpAsString($user->errors));
