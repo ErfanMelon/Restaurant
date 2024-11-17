@@ -41,6 +41,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Restaurants', 'url' => ['/admin/restaurant'] , 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'Products', 'url' => ['/admin/product'] , 'visible' => !Yii::$app->user->isGuest],
             ['label' => 'Tool', 'url' => ['/gii'] , 'visible' => !Yii::$app->user->isGuest],
 
             Yii::$app->user->isGuest
