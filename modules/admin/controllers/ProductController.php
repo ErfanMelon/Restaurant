@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\models\Product;
+use app\modules\admin\models\ProductForm;
 use app\modules\admin\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -67,17 +68,14 @@ class ProductController extends Controller
      */
     public function actionCreate($menu_id)
     {
-        $model = new Product();
+        $model = new ProductForm();
         if (isset($menu_id) && is_numeric($menu_id)) {
             $model->menu_id = $menu_id;
         }
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post()) && $model->createProduct()) {
                 return $this->redirect(['view', 'product_id' => $model->product_id]);
             }
-            echo '<pre>';
-            var_dump($model->getErrors(),$model->getAttribute('created_at'));
-            echo '</pre>';
         } else {
             $model->loadDefaultValues();
         }
@@ -98,7 +96,7 @@ class ProductController extends Controller
     {
         $model = $this->findModel($product_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->updateProduct()) {
             return $this->redirect(['view', 'product_id' => $model->product_id]);
         }
 
@@ -131,7 +129,8 @@ class ProductController extends Controller
     protected function findModel($product_id)
     {
         if (($model = Product::findOne(['product_id' => $product_id])) !== null) {
-            return $model;
+            $mod = new ProductForm($model);
+            return $mod;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
