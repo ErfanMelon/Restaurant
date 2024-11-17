@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Class m241117_111701_init_rbac
- * yii migrate --migrationPath=@yii/rbac/migrations
+ * Class m241117_152926_add_default_roles_and_permissions
  */
-class m241117_111701_init_rbac extends Migration
+class m241117_152926_add_default_roles_and_permissions extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
+
         $auth = Yii::$app->authManager;
 
         $admin = $auth->createRole('admin');

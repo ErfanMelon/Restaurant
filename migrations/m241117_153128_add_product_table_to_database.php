@@ -3,13 +3,10 @@
 use yii\db\Migration;
 
 /**
- * Class m241117_141050_add_product_table_to_database
+ * Class m241117_153128_add_product_table_to_database
  */
-class m241117_141050_add_product_table_to_database extends Migration
+class m241117_153128_add_product_table_to_database extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
     public function safeUp()
     {
         $this->createTable('product', [
@@ -35,4 +32,5 @@ class m241117_141050_add_product_table_to_database extends Migration
     {
         $this->dropTable('product');
     }
+
 }
