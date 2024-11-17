@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\admin;
+namespace app\modules\staff;
 
 use yii\filters\AccessControl;
 
 /**
- * admin module definition class
+ * staff module definition class
  */
 class Module extends \yii\base\Module
 {
@@ -15,7 +15,7 @@ class Module extends \yii\base\Module
             parent::behaviors(),
             [
                 'access' => [
-                    'class' => AccessControl::className(),
+                    'class' => AccessControl::class,
                     'rules' => [
                         [
                             'allow' => false,
@@ -23,25 +23,23 @@ class Module extends \yii\base\Module
                         ],
                         [
                             'allow' => true,
-                            'roles' => ['admin'],
+                            'roles' => ['restaurantManager'],
                         ]
                     ]
                 ]
             ]
         );
     }
-
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'app\modules\admin\controllers';
+    public $controllerNamespace = 'app\modules\staff\controllers';
 
     /**
      * {@inheritdoc}
      */
     public function init()
     {
-        $this->layout = '@app/modules/admin/views/layouts/main';
         parent::init();
 
         // custom initialization code goes here

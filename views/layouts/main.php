@@ -1,6 +1,7 @@
 <?php
 
 /** @var yii\web\View $this */
+
 /** @var string $content */
 
 use app\assets\AppAsset;
@@ -45,18 +46,22 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
-                    . Html::beginForm(['/site/logout'])
-                    . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->user_name . ')',
-                        ['class' => 'nav-link btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>',
-            ['label' => 'Register', 'url' => ['/site/register'] , 'visible' => Yii::$app->user->isGuest],
-            ['label'=>'Admin' , 'url' => ['/admin'] , 'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->is_admin()]
+                . Html::beginForm(['/site/logout'])
+                . Html::submitButton(
+                    'Logout (' . Yii::$app->user->identity->user_name . ')',
+                    ['class' => 'nav-link btn btn-link logout']
+                )
+                . Html::endForm()
+                . '</li>',
+            ['label' => 'Register', 'url' => ['/site/register'], 'visible' => Yii::$app->user->isGuest],
+            ['label' => 'Admin', 'url' => ['/admin'], 'visible' => Yii::$app->user->can('admin')],
+            ['label' => 'My Restaurant', 'url' => ['/staff'], 'visible' => Yii::$app->user->can('restaurantManager')],
         ],
     ]);
     NavBar::end();
+    echo '<pre>';
+    //    var_dump(Yii::$app->user->);
+    echo '</pre>';
     ?>
 </header>
 
