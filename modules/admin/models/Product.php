@@ -51,7 +51,7 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             [['menu_id', 'name'], 'required'],
-            [['menu_id', 'inStock', 'created_at', 'created_by', 'updated_at', 'updated_by','price'], 'integer'],
+            [['menu_id', 'inStock', 'created_at', 'created_by', 'updated_at', 'updated_by', 'price'], 'integer'],
             ['inStock', 'compare', 'compareValue' => 0, 'operator' => '>='],
             ['price', 'compare', 'compareValue' => 0, 'operator' => '>='],
             [['name'], 'string', 'max' => 100],
@@ -112,10 +112,12 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::class, ['user_id' => 'updated_by']);
     }
+
     public function getMenus()
     {
         return ArrayHelper::map(Menu::find()->select(['menu_id', 'title'])->all(), 'menu_id', 'title');
     }
+
     public function getModifier()
     {
         return User::findOne(['user_id' => $this->updated_by])->user_name ?? '';
@@ -124,5 +126,11 @@ class Product extends \yii\db\ActiveRecord
     public function getCreator()
     {
         return User::findOne(['user_id' => $this->created_by])->user_name ?? '';
+    }
+
+    public function getCurrentUserMenu()
+    {
+        return ArrayHelper::map(
+            Menu::findAll(['created_by' =>Yii::$app->user->id]) , 'menu_id', 'title');
     }
 }
