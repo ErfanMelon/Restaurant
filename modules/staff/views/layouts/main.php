@@ -42,8 +42,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'options' => ['class' => 'navbar-nav ml-auto'],
         'items' => [
             ['label' => 'Home', 'url' => ['/staff/default/index']],
-            ['label' => 'Menus', 'url' => ['/staff/Menu/index']],
-            ['label' => 'Products', 'url' => ['/staff/Product/index']],
+            ['label' => 'Menus', 'url' => ['/staff/menu/index']],
+            ['label' => 'Products', 'url' => ['/staff/product/index']],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
