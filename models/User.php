@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\modules\admin\models\Restaurant;
 use Yii;
 
 /**
@@ -98,5 +99,18 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function is_admin()
     {
         return $this->user_type === self::USER_TYPE_ADMIN;
+    }
+
+    public function getUserRestaurant()
+    {
+        $restaurant = Restaurant::find()
+        ->where(['user_id' => $this->user_id])
+        ->select(['restaurant_id', 'name'])
+        ->one();
+        if(!$restaurant)
+        {
+            return [];
+        }
+        return $restaurant;
     }
 }
