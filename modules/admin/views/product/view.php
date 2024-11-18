@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'menu_id',
             'name',
             'inStock',
+            'price',
             ['label' => 'Created_at', 'attribute' => 'created_at', 'value' => fn($m) => Yii::$app->formatter->asRelativeTime($m->created_at)],
             ['label' => 'Created_by', 'attribute' => 'created_by', 'value' => fn($m) => $m->getCreator()],
             ['label' => 'Updated_at', 'attribute' => 'updated_at', 'value' => fn($m) => Yii::$app->formatter->asRelativeTime($m->updated_at)],
