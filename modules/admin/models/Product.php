@@ -19,6 +19,7 @@ use yii\helpers\ArrayHelper;
  * @property int $created_by
  * @property int|null $updated_at
  * @property int|null $updated_by
+ * @property int $price
  *
  * @property User $createdBy
  * @property Menu $menu
@@ -50,8 +51,9 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             [['menu_id', 'name'], 'required'],
-            [['menu_id', 'inStock', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
+            [['menu_id', 'inStock', 'created_at', 'created_by', 'updated_at', 'updated_by','price'], 'integer'],
             ['inStock', 'compare', 'compareValue' => 0, 'operator' => '>='],
+            ['price', 'compare', 'compareValue' => 0, 'operator' => '>='],
             [['name'], 'string', 'max' => 100],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'user_id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'user_id']],
@@ -74,6 +76,7 @@ class Product extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+            'price' => 'Price',
         ];
     }
 
@@ -109,5 +112,17 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::class, ['user_id' => 'updated_by']);
     }
+    public function getMenus()
+    {
+        return ArrayHelper::map(Menu::find()->select(['menu_id', 'title'])->all(), 'menu_id', 'title');
+    }
+    public function getModifier()
+    {
+        return User::findOne(['user_id' => $this->updated_by])->user_name ?? '';
+    }
 
+    public function getCreator()
+    {
+        return User::findOne(['user_id' => $this->created_by])->user_name ?? '';
+    }
 }

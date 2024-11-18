@@ -68,12 +68,12 @@ class ProductController extends Controller
      */
     public function actionCreate($menu_id)
     {
-        $model = new ProductForm();
+        $model = new Product();
         if (isset($menu_id) && is_numeric($menu_id)) {
             $model->menu_id = $menu_id;
         }
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->createProduct()) {
+            if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'product_id' => $model->product_id]);
             }
         } else {
@@ -96,7 +96,7 @@ class ProductController extends Controller
     {
         $model = $this->findModel($product_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->updateProduct()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'product_id' => $model->product_id]);
         }
 
@@ -129,8 +129,7 @@ class ProductController extends Controller
     protected function findModel($product_id)
     {
         if (($model = Product::findOne(['product_id' => $product_id])) !== null) {
-            $mod = new ProductForm($model);
-            return $mod;
+            return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');

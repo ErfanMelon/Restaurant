@@ -34,9 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'inStock',
             ['label' =>'Created On' , 'attribute' =>'created_at' , 'value' => fn($model)=>Yii::$app->formatter->asRelativeTime($model->created_at)],
-            //'created_by',
-            //'updated_at',
-            //'updated_by',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Product $model, $key, $index, $column) {
