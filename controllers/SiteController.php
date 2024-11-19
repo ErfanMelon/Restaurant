@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\RegisterForm;
+use app\modules\admin\models\Menu;
+use app\modules\admin\models\Product;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -62,7 +64,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $menus = Menu::find(['is_active' =>true])->limit(20)->all();
+        $products = Product::find()->limit(20)->all();
+        return $this->render('index',[
+            'menus'=>$menus ,
+            'products'=>$products
+        ]);
     }
 
     /**
