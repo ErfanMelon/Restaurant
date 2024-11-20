@@ -15,6 +15,7 @@ class OrderController extends \yii\web\Controller
     // }
     public function actionAddItem()
     {
+        if(Yii::$app->user->isGuest) return Yii::$app->response->redirect(['site/login']);
         if (Yii::$app->request->isAjax) {
             $product_id = Yii::$app->request->post('product_id');
             $result = OrderForm::orderNewItem($product_id, 1);
