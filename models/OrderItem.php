@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\modules\admin\models\Product;
 use Yii;
 
 /**
