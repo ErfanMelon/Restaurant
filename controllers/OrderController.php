@@ -66,4 +66,13 @@ class OrderController extends \yii\web\Controller
             return $this->redirect(['order/index']);
         }
     }
+
+    public function actionPayOrder()
+    {
+        if(Yii::$app->request->isPost){
+            $order_id = Yii::$app->request->get('order_id');
+            OrderForm::payOrder($order_id);
+            return $this->redirect(['order/index']);
+        }
+    }
 }

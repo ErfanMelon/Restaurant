@@ -34,6 +34,16 @@ class OrderForm extends Order
         return true;
     }
 
+    public static function payOrder($order_id)
+    {
+        $order = Order::findOne($order_id);
+        if(!$order) throw new NotFoundHttpException();
+        if($order->getOrderStatus()->one()->name != 'preInvoice') throw new NotAcceptableHttpException();
+        $order->order_status_id = OrderStatus::findOne(['name' => 'restaurantVerificati'])->order_status_id;
+        $order->save();
+        return true;
+    }
+
     public function rules()
     {
         return [

@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['label' => 'total_price', 'attribute' => 'total_price', 'value' => fn($model) => Yii::$app->formatter->asInteger($model->total_price)],
             [
                 'class' => ActionColumn::className(),
-                'template' => '{view} {cancell-order}',
+                'template' => '{view} {cancell-order} {submit-order}',
                 'urlCreator' => function ($action, $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'order_id' => $model->order_id]);
                 },
@@ -41,11 +41,21 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'method' => 'post',
                             ],
                         ]);
-                    },
+                        },
+                        'submit-order' =>function ($url, $model, $key) {
+                            return Html::a('submit order', ['/order/pay-order', 'order_id' => $model->order_id], [
+                                'class' => 'btn btn-success btn-sm',
+                                'data' => [
+                                    'confirm' => 'Are you sure you want to submit this order?',
+                                    'method' => 'post',
+                                ]
+                            ]);
+                        }
+                        ],
                 ],
             ],
-        ],
-    ]); ?>
+        ]);
+    ?>
 
 
 </div>
