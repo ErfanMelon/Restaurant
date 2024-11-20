@@ -83,7 +83,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         </div>
     </div>
 </footer>
-
+<?= $this->blocks['scripts'] ?? '' ?>
 <?php $this->endBody() ?>
 </body>
 </html>

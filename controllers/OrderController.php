@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\OrderForm;
 use Yii;
 
 class OrderController extends \yii\web\Controller
@@ -10,8 +11,10 @@ class OrderController extends \yii\web\Controller
     // {
     //     return $this->render('index');
     // }
-    public function addItem()
+    public function actionAddItem()
     {
-        Yii::$app->request->get('product_id');
+        $product_id = Yii::$app->request->get('product_id');
+        $result = OrderForm::orderNewItem($product_id, 1);
+        return $result === 1;
     }
 }
