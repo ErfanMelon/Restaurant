@@ -32,8 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'address',
             'phone_number',
-            ['label' =>'Owner','attribute'=>'user_id' , 'value' => fn($model)=>$model->getUserName()],
-            ['label' =>'Created On' , 'attribute' =>'created_at' , 'value' => fn($model)=>Yii::$app->formatter->asRelativeTime($model->created_at)],
+            ['label' =>'Owner','attribute'=>'user_id' , 'value' => function($m){return $m->getUserName();}],
+            ['label' =>'Created On' , 'attribute' =>'created_at' , 'value' => function($m){return Yii::$app->formatter->asRelativeTime($m->created_at);}],
 //            'updated_at',
             [
                 'class' => ActionColumn::className(),
