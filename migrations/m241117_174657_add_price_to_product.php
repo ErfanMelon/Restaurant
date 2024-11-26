@@ -18,8 +18,8 @@ class m241117_174657_add_price_to_product extends Migration
             'value' => $this->integer()->notNull(),
             'from_date' => $this->integer()->notNull(),
             'to_date' => $this->integer()->null(),
-            'created_at' => $this->integer()->null(),
-            'updated_at' => $this->integer()->null(),
+            'created_at' => $this->timestamp()->null(),
+            'updated_at' => $this->timestamp()->null(),
             'created_by' => $this->integer()->null(),
             'updated_by' => $this->integer()->null(),
         ]);

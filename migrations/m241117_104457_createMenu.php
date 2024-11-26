@@ -17,8 +17,8 @@ class m241117_104457_createMenu extends Migration
             'restaurant_id' => $this->integer()->notNull(),
             'title' =>$this->string(150)->notNull(),
             'is_active'=>$this->boolean()->notNull()->defaultValue(1),
-            'created_at'=>$this->integer()->notNull()->defaultExpression('unix_timestamp()'),
-            'updated_at'=>$this->integer()->null(),
+            'created_at'=>$this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at'=>$this->timestamp()->null(),
             'created_by'=>$this->integer()->notNull(),
             'updated_by'=>$this->integer()->null(),
         ]);

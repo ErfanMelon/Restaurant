@@ -14,7 +14,7 @@ class m241119_122211_seed_order_status_table extends Migration
     {
         $this->insert('order_status',['name'=>'cancelled']);
         $this->insert('order_status',['name'=>'preInvoice']);
-        $this->insert('order_status',['name'=>'restaurantVerification']);
+        $this->insert('order_status',['name'=>'resVerification']);
         $this->insert('order_status',['name'=>'pendingPreparation']);
         $this->insert('order_status',['name'=>'send']);
         $this->insert('order_status',['name'=>'delivered']);

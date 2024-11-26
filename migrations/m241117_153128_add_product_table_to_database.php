@@ -14,9 +14,9 @@ class m241117_153128_add_product_table_to_database extends Migration
             'menu_id' => $this->integer()->notNull(),
             'name' => $this->string(100)->notNull(),
             'inStock' => $this->integer()->notNull()->defaultValue(0),
-            'created_at' => $this->integer()->notNull()->defaultExpression('unix_timestamp()'),
+            'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'created_by' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->null(),
+            'updated_at' => $this->timestamp()->null(),
             'updated_by' => $this->integer()->null(),
         ]);
         $this->addForeignKey('fk_product_menu', 'product', 'menu_id', 'menu', 'menu_id');
