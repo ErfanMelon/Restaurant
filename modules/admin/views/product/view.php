@@ -34,10 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'inStock',
             'price',
-            ['label' => 'Created_at', 'attribute' => 'created_at', 'value' => fn($m) => Yii::$app->formatter->asRelativeTime($m->created_at)],
-            ['label' => 'Created_by', 'attribute' => 'created_by', 'value' => fn($m) => $m->getCreator()],
-            ['label' => 'Updated_at', 'attribute' => 'updated_at', 'value' => fn($m) => Yii::$app->formatter->asRelativeTime($m->updated_at)],
-            ['label' => 'Updated_by', 'attribute' => 'updated_by', 'value' => fn($m) => $m->getModifier()],
+            ['label' => 'Created_at', 'attribute' => 'created_at', 'value' => function($m){ return Yii::$app->formatter->asRelativeTime($m->created_at);}],
+            ['label' => 'Created_by', 'attribute' => 'created_by', 'value' => function($m){ return $m->getCreator();}],
+            ['label' => 'Updated_at', 'attribute' => 'updated_at', 'value' => function($m){ return Yii::$app->formatter->asRelativeTime($m->updated_at);}],
+            ['label' => 'Updated_by', 'attribute' => 'updated_by', 'value' => function($m){ return $m->getModifier();}],
         ],
     ]) ?>
 
