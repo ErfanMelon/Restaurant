@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'order_date:date',
-            ['label' => 'Order Status', 'attribute' => 'order_status_id', 'value' => fn($m) => $m->getOrderStatus()->one()->name],
-            ['label' => 'total_price', 'attribute' => 'total_price', 'value' => fn($model) => Yii::$app->formatter->asInteger($model->total_price)],
+            ['label' => 'Order Status', 'attribute' => 'order_status_id', 'value' => function($m){return $m->getOrderStatus()->one()->name;}],
+            ['label' => 'total_price', 'attribute' => 'total_price', 'value' => function($m){return Yii::$app->formatter->asInteger($m->total_price);}],
             [
                 'class' => ActionColumn::className(),
                 'template' => '{view} {cancell-order} {submit-order}',
