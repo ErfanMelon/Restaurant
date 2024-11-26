@@ -11,7 +11,7 @@ use app\modules\admin\models\Product;
  */
 class ProductSearch extends Product
 {
-    public int $restaurant_id = 0;
+    public $restaurant_id = 0;
 
     /**
      * {@inheritdoc}

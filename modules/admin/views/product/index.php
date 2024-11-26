@@ -30,10 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'product_id',
-            ['label' =>'Menu' , 'attribute' =>'menu_id' , 'value' => fn($m)=>$m->getMenu()->one()->title],
+            ['label' =>'Menu' , 'attribute' =>'menu_id' , 'value' => function($m){return $m->getMenu()->one()->title;}],
             'name',
             'inStock',
-            ['label' =>'Created On' , 'attribute' =>'created_at' , 'value' => fn($model)=>Yii::$app->formatter->asRelativeTime($model->created_at)],
+            ['label' =>'Created On' , 'attribute' =>'created_at' , 'value' => function($m){return Yii::$app->formatter->asRelativeTime($m->created_at);}],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Product $model, $key, $index, $column) {
